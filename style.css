@@ -1,0 +1,32 @@
+body {
+  margin: 0 auto;
+  max-width: 600px;
+
+  font-family: "Inter", sans-serif;
+  color: #27262b;
+
+  text-autospace: normal;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-break: strict;
+  font-feature-settings:
+    "palt" 1,
+    "pkna" 1,
+    "rlig" 1;
+}
+
+section,
+header,
+footer {
+  margin: 40px 0;
+}
+
+blockquote {
+  margin: 0;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
