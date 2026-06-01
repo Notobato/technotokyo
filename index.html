@@ -3,12 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>TOKIO!</title>
+    <script>
+      const savedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+
+      if (savedTheme || prefersDark) {
+        document.documentElement.dataset.theme = savedTheme || "dark";
+      }
+    </script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
       <h1>TECHNOPOLIS.TOKYO</h1>
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="Toggle dark mode"
+      >
+        <span class="theme-icon" aria-hidden="true">☾</span>
+        <span class="visually-hidden">Dark mode</span>
+      </button>
     </header>
     <main>
       <section>
@@ -74,5 +94,41 @@
     <footer>
       <p>&copy; 2026 technopolis.tokyo</p>
     </footer>
+    <script>
+      const themeToggle = document.getElementById("themeToggle");
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+      function getTheme() {
+        return document.documentElement.dataset.theme || "light";
+      }
+
+      function setTheme(theme, persist = true) {
+        document.documentElement.dataset.theme = theme;
+        themeToggle.querySelector(".theme-icon").textContent =
+          theme === "dark" ? "☼" : "☾";
+        themeToggle.title =
+          theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+        themeToggle.setAttribute(
+          "aria-label",
+          theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+        );
+
+        if (persist) {
+          localStorage.setItem("theme", theme);
+        }
+      }
+
+      setTheme(getTheme(), false);
+
+      themeToggle.addEventListener("click", () => {
+        setTheme(getTheme() === "dark" ? "light" : "dark");
+      });
+
+      mediaQuery.addEventListener("change", (event) => {
+        if (!localStorage.getItem("theme")) {
+          setTheme(event.matches ? "dark" : "light", false);
+        }
+      });
+    </script>
   </body>
 </html>
