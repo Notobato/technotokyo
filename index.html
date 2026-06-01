@@ -6,13 +6,17 @@
     <meta name="color-scheme" content="light dark" />
     <title>TOKIO!</title>
     <script>
-      const savedTheme = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
+      let savedTheme = null;
+      try {
+        savedTheme = localStorage.getItem("theme");
+      } catch {}
 
-      if (savedTheme || prefersDark) {
-        document.documentElement.dataset.theme = savedTheme || "dark";
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (savedTheme === "dark" || savedTheme === "light") {
+        document.documentElement.dataset.theme = savedTheme;
+      } else if (prefersDark) {
+        document.documentElement.dataset.theme = "dark";
       }
     </script>
     <link rel="stylesheet" href="style.css" />
@@ -92,7 +96,8 @@
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
       function getTheme() {
-        return document.documentElement.dataset.theme || "light";
+        const theme = document.documentElement.dataset.theme;
+        return theme === "dark" || theme === "light" ? theme : "light";
       }
 
       function setTheme(theme, persist = true) {
@@ -107,7 +112,9 @@
         );
 
         if (persist) {
-          localStorage.setItem("theme", theme);
+          try {
+            localStorage.setItem("theme", theme);
+          } catch {}
         }
       }
 
