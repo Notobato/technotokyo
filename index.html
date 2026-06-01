@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,26 +20,28 @@
   <body>
     <header>
       <h1>TECHNOPOLIS.TOKYO</h1>
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="Toggle dark mode"
+      >
+        <span class="theme-icon" aria-hidden="true">☾</span>
+        <span class="visually-hidden">Dark mode</span>
+      </button>
     </header>
     <main>
-      <section class="intro">
+      <section>
         <p>YMOがお好きですね？</p>
       </section>
       <section>
         <h2>「テクノポリス」について</h2>
-        <figure class="quote">
+        <figure>
           <blockquote>
-            <p>
-              単に売れる曲を書いてやろうと思って
-            </p>
+            <p>単に売れる曲を書いてやろうと思って</p>
           </blockquote>
           <figcaption>
-            <cite
-              >―
-              <a href="https://www.sitesakamoto.com/"
-                >坂本龍一</a
-              ></cite
-            >
+            <cite>― <a href="https://www.sitesakamoto.com/">坂本龍一</a></cite>
           </figcaption>
         </figure>
       </section>
@@ -47,7 +49,6 @@
         <h2>「テクノポリス」を聴く</h2>
         <div class="links">
           <iframe
-            class="music-embed apple-music"
             height="175"
             width="100%"
             title="Media player"
@@ -55,10 +56,17 @@
             id="embedPlayer"
             sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
             allow="autoplay *; encrypted-media *; clipboard-write"
+            style="
+              border: 0px;
+              border-radius: 12px;
+              width: 100%;
+              height: 175px;
+              max-width: 660px;
+            "
           ></iframe>
           <iframe
-            class="music-embed spotify"
             data-testid="embed-iframe"
+            style="border-radius: 12px"
             src="https://open.spotify.com/embed/track/5MtYHSbBf38SdGWsaBVdsv?utm_source=generator"
             width="100%"
             height="152"
